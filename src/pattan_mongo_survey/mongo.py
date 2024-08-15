@@ -7,8 +7,21 @@ from .exceptions import MissingSurveyId, DataSaveFailure, FetchResultsFailure, D
 
 
 class MongoSurveyService:
+    """
+    MongoSurveyService supports a mongo database backend for surveyJS
+    """
 
     def __init__(self, config=None):
+        """
+        Constructor for MongoSurveyService
+        :param config: A Dictionary containing the following configuration parameters
+            'MONGDB_USER'
+            'MONGDB_PASSWD'
+            'MONGDB_HOST'
+            'MONGDB_DB'
+            'MONGDB_SURVEY_COLLECTION'
+            'MONGDB_DB_RESPONSE_COLLECTION'
+        """
         if config is None:
             raise PattanMongoSurveyConfigurationError
         else:
@@ -19,14 +32,22 @@ class MongoSurveyService:
         self.database = config['MONGDB_DB']
         self.survey_collection = config['MONGDB_SURVEY_COLLECTION']
         self.response_collection = config['MONGDB_DB_RESPONSE_COLLECTION']
-        self.mongo_con = MongoClient(self.get_mongo_connection_string())
+        self.mongo_con = MongoClient(self._get_mongo_connection_string())
         self.db = self.mongo_con[config['MONGDB_DB']]
         self.survey_db = self.db.survey
 
-    def get_mongo_connection_string(self):
+    def _get_mongo_connection_string(self):
+        """
+        Build the mongo db connection string.
+        :return: None
+        """
         return "mongodb+srv://{0}:{1}@{2}/".format(self.username, self.password, self.host)
 
     def get_survey_list(self):
+        """
+        Get a list of object ids and survey titles
+        :return: list
+        """
         result = []
         for survey in self.survey_db.find(projection={'_id': 1, 'survey': {'title': 1}}):
             survey['id'] = survey['_id']  # django template will not take a parameter that starts with in '_'
@@ -34,12 +55,27 @@ class MongoSurveyService:
         return result
 
     def get_survey(self, survey_id=None):
-        if not survey_id:
+        """
+        get_survey returns a survey object
+        :param survey_id:
+        :return: survey object id and a survey suitable to use as a surveyJS survey model
+        """
+        if survey_id is None:
             raise MissingSurveyId
         result = self.survey_db.find_one({'_id': ObjectId(survey_id)})
         return result
 
-    def save_survey_response(self, response, survey_id):
+    def save_survey_response(self, response=None, survey_id=None):
+        """
+        Save a survey responses linked to a specific survey
+        :param response: surveyJS response object
+        :param survey_id: mongo object id of the survey
+        :return: An instance of InsertOneResult (inserted id, and acknowledged)
+        """
+        if response is None:
+            raise DataSaveFailure('Response cannot be None')
+        if survey_id is None:
+            raise MissingSurveyId
         survey_response = self.db.surveyResponse
         survey_reference = DBRef('survey', survey_id)
         try:
@@ -72,7 +108,9 @@ class MongoSurveyService:
         return_message = {'message': 'results saved', 'survey_id': str(survey_id)}
         return return_message
 
-    def get_survey_responses(self, survey_id):
+    def get_survey_responses(self, survey_id=None):
+        if survey_id is None:
+            raise MissingSurveyId
         survey_response = self.db.surveyResponse
         survey_reference = DBRef('survey', survey_id)
         try:
@@ -94,7 +132,9 @@ class MongoSurveyService:
             raise DeleteSurveyFailure
         return True
 
-    def delete_survey_responses(self, survey_id):
+    def delete_survey_responses(self, survey_id=None):
+        if not survey_id:
+            raise MissingSurveyId
         survey_response = self.db.surveyResponse
         survey_reference = DBRef('survey', survey_id)
         try:
@@ -121,5 +161,5 @@ class MongoSurveyService:
             missing_keys.append('MONGDB_DB_RESPONSE_COLLECTION')
 
         if len(missing_keys) > 0:
-            raise PattanMongoSurveyConfigurationError("The following key(s) are missing {0}".format(' '.join(missing_keys)))
-
+            raise PattanMongoSurveyConfigurationError(
+                "The following key(s) are missing {0}".format(' '.join(missing_keys)))
