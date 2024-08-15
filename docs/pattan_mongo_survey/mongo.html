@@ -132,6 +132,11 @@ hljs.highlightAll();
         return result
 
     def save_survey(self, data):
+        &#34;&#34;&#34;
+        Save a surveyJS model to the mongo survey collection
+        :param data: surveyJS model
+        :return: JSON containing a message object indicating success or failure
+        &#34;&#34;&#34;
         data_dict = json.loads(data)
         survey_id = data_dict[&#39;survey_id&#39;]
         data_dict.pop(&#39;survey_id&#39;)
@@ -156,6 +161,11 @@ hljs.highlightAll();
         return return_message
 
     def get_survey_responses(self, survey_id=None):
+        &#34;&#34;&#34;
+        Get all user response to a specific survey
+        :param survey_id: mongo object id of the survey
+        :return:
+        &#34;&#34;&#34;
         if survey_id is None:
             raise MissingSurveyId
         survey_response = self.db.surveyResponse
@@ -167,6 +177,11 @@ hljs.highlightAll();
         return list(result)
 
     def delete_survey(self, survey_id):
+        &#34;&#34;&#34;
+        Delete a survey and all its related responses
+        :param survey_id: mongo object id of the survey
+        :return: True if the survey was deleted, raises DeleteSurveyFailure exception otherwise
+        &#34;&#34;&#34;
         if not survey_id:
             raise MissingSurveyId
         try:
@@ -180,6 +195,11 @@ hljs.highlightAll();
         return True
 
     def delete_survey_responses(self, survey_id=None):
+        &#34;&#34;&#34;
+        Delete all user response to a specific survey but not the survey.
+        :param survey_id: mongo object id of the survey
+        :return: True if all survey responses were deleted, raises DeleteSurveyResponseFailure exception otherwise
+        &#34;&#34;&#34;
         if not survey_id:
             raise MissingSurveyId
         survey_response = self.db.surveyResponse
@@ -191,6 +211,11 @@ hljs.highlightAll();
         return True
 
     def _is_configuration_valid(self, config_obj):
+        &#34;&#34;&#34;
+        Called by constructor to check if a configuration object is valid.
+        :param config_obj: python dictionary containing configuration parameters
+        :return: True if the configuration is valid, raises PattanMongoSurveyConfigurationError otherwise.
+        &#34;&#34;&#34;
         config_keys = config_obj.keys()
         missing_keys = []
 
@@ -209,7 +234,9 @@ hljs.highlightAll();
 
         if len(missing_keys) &gt; 0:
             raise PattanMongoSurveyConfigurationError(
-                &#34;The following key(s) are missing {0}&#34;.format(&#39; &#39;.join(missing_keys)))</code></pre>
+                &#34;The following key(s) are missing {0}&#34;.format(&#39; &#39;.join(missing_keys)))
+
+        return True</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -217,13 +244,17 @@ hljs.highlightAll();
 <span>def <span class="ident">delete_survey</span></span>(<span>self, survey_id)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Delete a survey and all its related responses
+:param survey_id: mongo object id of the survey
+:return: True if the survey was deleted, raises DeleteSurveyFailure exception otherwise</p></div>
 </dd>
 <dt id="pattan_mongo_survey.mongo.MongoSurveyService.delete_survey_responses"><code class="name flex">
 <span>def <span class="ident">delete_survey_responses</span></span>(<span>self, survey_id=None)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Delete all user response to a specific survey but not the survey.
+:param survey_id: mongo object id of the survey
+:return: True if all survey responses were deleted, raises DeleteSurveyResponseFailure exception otherwise</p></div>
 </dd>
 <dt id="pattan_mongo_survey.mongo.MongoSurveyService.get_survey"><code class="name flex">
 <span>def <span class="ident">get_survey</span></span>(<span>self, survey_id=None)</span>
@@ -244,13 +275,17 @@ hljs.highlightAll();
 <span>def <span class="ident">get_survey_responses</span></span>(<span>self, survey_id=None)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Get all user response to a specific survey
+:param survey_id: mongo object id of the survey
+:return:</p></div>
 </dd>
 <dt id="pattan_mongo_survey.mongo.MongoSurveyService.save_survey"><code class="name flex">
 <span>def <span class="ident">save_survey</span></span>(<span>self, data)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Save a surveyJS model to the mongo survey collection
+:param data: surveyJS model
+:return: JSON containing a message object indicating success or failure</p></div>
 </dd>
 <dt id="pattan_mongo_survey.mongo.MongoSurveyService.save_survey_response"><code class="name flex">
 <span>def <span class="ident">save_survey_response</span></span>(<span>self, response=None, survey_id=None)</span>

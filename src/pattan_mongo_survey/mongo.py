@@ -85,6 +85,11 @@ class MongoSurveyService:
         return result
 
     def save_survey(self, data):
+        """
+        Save a surveyJS model to the mongo survey collection
+        :param data: surveyJS model
+        :return: JSON containing a message object indicating success or failure
+        """
         data_dict = json.loads(data)
         survey_id = data_dict['survey_id']
         data_dict.pop('survey_id')
@@ -109,6 +114,11 @@ class MongoSurveyService:
         return return_message
 
     def get_survey_responses(self, survey_id=None):
+        """
+        Get all user response to a specific survey
+        :param survey_id: mongo object id of the survey
+        :return:
+        """
         if survey_id is None:
             raise MissingSurveyId
         survey_response = self.db.surveyResponse
@@ -120,6 +130,11 @@ class MongoSurveyService:
         return list(result)
 
     def delete_survey(self, survey_id):
+        """
+        Delete a survey and all its related responses
+        :param survey_id: mongo object id of the survey
+        :return: True if the survey was deleted, raises DeleteSurveyFailure exception otherwise
+        """
         if not survey_id:
             raise MissingSurveyId
         try:
@@ -133,6 +148,11 @@ class MongoSurveyService:
         return True
 
     def delete_survey_responses(self, survey_id=None):
+        """
+        Delete all user response to a specific survey but not the survey.
+        :param survey_id: mongo object id of the survey
+        :return: True if all survey responses were deleted, raises DeleteSurveyResponseFailure exception otherwise
+        """
         if not survey_id:
             raise MissingSurveyId
         survey_response = self.db.surveyResponse
@@ -144,6 +164,11 @@ class MongoSurveyService:
         return True
 
     def _is_configuration_valid(self, config_obj):
+        """
+        Called by constructor to check if a configuration object is valid.
+        :param config_obj: python dictionary containing configuration parameters
+        :return: True if the configuration is valid, raises PattanMongoSurveyConfigurationError otherwise.
+        """
         config_keys = config_obj.keys()
         missing_keys = []
 
@@ -163,3 +188,5 @@ class MongoSurveyService:
         if len(missing_keys) > 0:
             raise PattanMongoSurveyConfigurationError(
                 "The following key(s) are missing {0}".format(' '.join(missing_keys)))
+
+        return True
