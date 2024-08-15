@@ -1,5 +1,3 @@
-from dotenv import load_dotenv
-import os
 from pymongo import MongoClient
 from bson import ObjectId
 import json
@@ -13,6 +11,8 @@ class MongoSurveyService:
     def __init__(self, config=None):
         if config is None:
             raise PattanMongoSurveyConfigurationError
+        else:
+            self._is_configuration_valid(config)
         self.username = config['MONGDB_USER']
         self.password = config['MONGDB_PASSWD']
         self.host = config['MONGDB_HOST']
@@ -102,3 +102,24 @@ class MongoSurveyService:
         except Exception as e:
             raise DeleteSurveyResponseFailure
         return True
+
+    def _is_configuration_valid(self, config_obj):
+        config_keys = config_obj.keys()
+        missing_keys = []
+
+        if 'MONGDB_USER' not in config_keys:
+            missing_keys.append('MONGDB_USER')
+        if 'MONGDB_PASSWD' not in config_keys:
+            missing_keys.append('MONGDB_PASSWD')
+        if 'MONGDB_HOST' not in config_keys:
+            missing_keys.append('MONGDB_HOST')
+        if 'MONGDB_DB' not in config_keys:
+            missing_keys.append('MONGDB_DB')
+        if 'MONGDB_SURVEY_COLLECTION' not in config_keys:
+            missing_keys.append('MONGDB_SURVEY_COLLECTION')
+        if 'MONGDB_DB_RESPONSE_COLLECTION' not in config_keys:
+            missing_keys.append('MONGDB_DB_RESPONSE_COLLECTION')
+
+        if len(missing_keys) > 0:
+            raise PattanMongoSurveyConfigurationError("The following key(s) are missing {0}".format(' '.join(missing_keys)))
+

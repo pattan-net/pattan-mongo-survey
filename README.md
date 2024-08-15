@@ -14,3 +14,5 @@ Python package to support surveyJS with a mongodb backend.
 4. MONGDB_DB
 5. MONGDB_SURVEY_COLLECTION - collection used to store survey questions
 6. MONGDB_DB_RESPONSE_COLLECTION - collection used to store survey responses
+
+# @todo add an API key option 
