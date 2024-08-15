@@ -16,4 +16,4 @@ Python package to support surveyJS with a mongodb backend.
 6. MONGDB_DB_RESPONSE_COLLECTION - collection used to store survey responses
 
 ## Documentation
-[docs](html/pattan_mongo_survey/index.html)
+[docs](docs/pattan_mongo_survey/index.md)
