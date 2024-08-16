@@ -3,7 +3,7 @@
 Python package to support surveyJS with a mongodb backend. 
 
 ## Installation 
-    1. pip install pattan-mongo-survey
+    1. pip install pattan-mongo-survey @ git+ssh://git@github.com/pattan-net/pattan-mongo-survey.git
 
 ## Configuration
     
