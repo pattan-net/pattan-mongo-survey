@@ -1,1 +1,1 @@
-from mongo import MongoSurveyService
+from pattan_mongo_survey.mongo import MongoSurveyService
