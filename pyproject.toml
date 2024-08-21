@@ -1,6 +1,6 @@
 [project]
 name = "pattan-mongo-survey"
-version = "1.0.0"
+version = "1.1.0"
 authors = [
   { name="Markus Weltin", email="mweltin@pattan.net" },
 ]
@@ -23,6 +23,7 @@ keywords = ["mongo", "surveyJS", ]
 [project.urls]
 Homepage = "https://github.com/pattan-net/pattan-mongo-survey"
 Important = "https://www.youtube.com/watch?v=xvFZjo5PgG0"
+Documentatin = "https://github.com/pattan-net/pattan-mongo-survey/tree/s1300/docs"
 
 
 [build-system]

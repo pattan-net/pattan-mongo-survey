@@ -1,6 +1,6 @@
 ### PATTAN-MONGO-SURVEY
 
-Python package to support surveyJS with a mongodb backend.
+Support a surveyJS frontend with a mongodb backend.
 
 ## Configuration
     
@@ -13,4 +13,4 @@ Python package to support surveyJS with a mongodb backend.
 6. MONGDB_DB_RESPONSE_COLLECTION - collection used to store survey responses
 
 ## Documentation
-[Docs]()
+[Docs](https://github.com/pattan-net/pattan-mongo-survey/tree/s1300/docs)
