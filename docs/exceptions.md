@@ -2,7 +2,7 @@
 
 [Pattan_mongo_survey Index](./README.md#pattan_mongo_survey-index) / Exceptions
 
-> Auto-generated documentation for [exceptions](../../../exceptions.py) module.
+> Auto-generated documentation for [exceptions](../src/pattan_mongo_survey/exceptions.py) module.
 
 - [Exceptions](#exceptions)
   - [DataSaveFailure](#datasavefailure)
@@ -14,7 +14,7 @@
 
 ## DataSaveFailure
 
-[Show source in exceptions.py:15](../../../exceptions.py#L15)
+[Show source in exceptions.py:15](../src/pattan_mongo_survey/exceptions.py#L15)
 
 #### Signature
 
@@ -27,7 +27,7 @@ class DataSaveFailure(Exception):
 
 ## DeleteSurveyFailure
 
-[Show source in exceptions.py:43](../../../exceptions.py#L43)
+[Show source in exceptions.py:43](../src/pattan_mongo_survey/exceptions.py#L43)
 
 #### Signature
 
@@ -40,7 +40,7 @@ class DeleteSurveyFailure(Exception):
 
 ## DeleteSurveyResponseFailure
 
-[Show source in exceptions.py:57](../../../exceptions.py#L57)
+[Show source in exceptions.py:57](../src/pattan_mongo_survey/exceptions.py#L57)
 
 #### Signature
 
@@ -53,7 +53,7 @@ class DeleteSurveyResponseFailure(Exception):
 
 ## FetchResultsFailure
 
-[Show source in exceptions.py:29](../../../exceptions.py#L29)
+[Show source in exceptions.py:29](../src/pattan_mongo_survey/exceptions.py#L29)
 
 #### Signature
 
@@ -66,7 +66,7 @@ class FetchResultsFailure(Exception):
 
 ## MissingSurveyId
 
-[Show source in exceptions.py:1](../../../exceptions.py#L1)
+[Show source in exceptions.py:1](../src/pattan_mongo_survey/exceptions.py#L1)
 
 #### Signature
 
@@ -79,7 +79,7 @@ class MissingSurveyId(Exception):
 
 ## PattanMongoSurveyConfigurationError
 
-[Show source in exceptions.py:71](../../../exceptions.py#L71)
+[Show source in exceptions.py:71](../src/pattan_mongo_survey/exceptions.py#L71)
 
 #### Signature
 

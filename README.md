@@ -14,3 +14,15 @@ Support a surveyJS frontend with a mongodb backend.
 
 ## Documentation
 [Docs](https://github.com/pattan-net/pattan-mongo-survey/tree/s1300/docs)
+
+## Logging
+pattan-mongo-survey creates its own logger (of the same name) which the calling application can configure.
+
+```python
+from pattan_mongo_survey import MongoSurveyService
+import logging
+
+mongo_logger = logging.getLogger('pattan_mongo_survey')
+mongo_logger.addHandler(logging.FileHandler('example.log'))
+mongo_logger.setLevel(logging.DEBUG)
+```

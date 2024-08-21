@@ -6,7 +6,8 @@ from bson.dbref import DBRef
 from .exceptions import MissingSurveyId, DataSaveFailure, FetchResultsFailure, DeleteSurveyFailure, \
     DeleteSurveyResponseFailure, PattanMongoSurveyConfigurationError
 
-logger = logging.getLogger('pattan_mongo_survey').addHandler(logging.NullHandler())
+logger = logging.getLogger('pattan_mongo_survey')
+logger.addHandler(logging.NullHandler())
 
 
 class MongoSurveyService:
@@ -26,6 +27,7 @@ class MongoSurveyService:
             'MONGDB_DB_RESPONSE_COLLECTION'
         """
         if config is None:
+            logger.critical("Missing configuration dictionary")
             raise PattanMongoSurveyConfigurationError
         else:
             self._is_configuration_valid(config)
@@ -38,13 +40,17 @@ class MongoSurveyService:
         self.mongo_con = MongoClient(self._get_mongo_connection_string())
         self.db = self.mongo_con[config['MONGDB_DB']]
         self.survey_db = self.db.survey
+        logger.debug("MongoSurveyService initialized")
 
     def _get_mongo_connection_string(self):
         """
         Build the mongo db connection string.
-        :return: None
+        :return: connection string
         """
-        return "mongodb+srv://{0}:{1}@{2}/".format(self.username, self.password, self.host)
+        connection_string = "mongodb+srv://{0}:{1}@{2}/".format(self.username, self.password, self.host)
+        logger.debug(
+            "MongoSurveyService connection string: mongodb+srv://{0}:******@{2}/".format(self.username, self.host))
+        return connection_string
 
     def get_survey_list(self):
         """
@@ -189,7 +195,8 @@ class MongoSurveyService:
             missing_keys.append('MONGDB_DB_RESPONSE_COLLECTION')
 
         if len(missing_keys) > 0:
+            logger.critical("Missing configuration dictionary keys: %s", ' '.join(missing_keys))
             raise PattanMongoSurveyConfigurationError(
                 "The following key(s) are missing {0}".format(' '.join(missing_keys)))
-
+        logger.debug("configuration object passes")
         return True

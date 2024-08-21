@@ -2,7 +2,7 @@
 
 [Pattan_mongo_survey Index](./README.md#pattan_mongo_survey-index) / Mongo
 
-> Auto-generated documentation for [mongo](../../../mongo.py) module.
+> Auto-generated documentation for [mongo](../src/pattan_mongo_survey/mongo.py) module.
 
 - [Mongo](#mongo)
   - [MongoSurveyService](#mongosurveyservice)
@@ -18,7 +18,7 @@
 
 ## MongoSurveyService
 
-[Show source in mongo.py:12](../../../mongo.py#L12)
+[Show source in mongo.py:13](../src/pattan_mongo_survey/mongo.py#L13)
 
 MongoSurveyService supports a mongo database backend for surveyJS
 
@@ -31,13 +31,13 @@ class MongoSurveyService:
 
 ### MongoSurveyService()._get_mongo_connection_string
 
-[Show source in mongo.py:42](../../../mongo.py#L42)
+[Show source in mongo.py:46](../src/pattan_mongo_survey/mongo.py#L46)
 
 Build the mongo db connection string.
 
 #### Returns
 
-None
+connection string
 
 #### Signature
 
@@ -47,7 +47,7 @@ def _get_mongo_connection_string(self): ...
 
 ### MongoSurveyService()._is_configuration_valid
 
-[Show source in mongo.py:169](../../../mongo.py#L169)
+[Show source in mongo.py:176](../src/pattan_mongo_survey/mongo.py#L176)
 
 Called by constructor to check if a configuration object is valid.
 
@@ -67,7 +67,7 @@ def _is_configuration_valid(self, config_obj): ...
 
 ### MongoSurveyService().delete_survey
 
-[Show source in mongo.py:135](../../../mongo.py#L135)
+[Show source in mongo.py:142](../src/pattan_mongo_survey/mongo.py#L142)
 
 Delete a survey and all its related responses
 
@@ -87,7 +87,7 @@ def delete_survey(self, survey_id): ...
 
 ### MongoSurveyService().delete_survey_responses
 
-[Show source in mongo.py:153](../../../mongo.py#L153)
+[Show source in mongo.py:160](../src/pattan_mongo_survey/mongo.py#L160)
 
 Delete all user response to a specific survey but not the survey.
 
@@ -107,7 +107,7 @@ def delete_survey_responses(self, survey_id=None): ...
 
 ### MongoSurveyService().get_survey
 
-[Show source in mongo.py:60](../../../mongo.py#L60)
+[Show source in mongo.py:67](../src/pattan_mongo_survey/mongo.py#L67)
 
 get_survey returns a survey object
 
@@ -127,7 +127,7 @@ def get_survey(self, survey_id=None): ...
 
 ### MongoSurveyService().get_survey_list
 
-[Show source in mongo.py:49](../../../mongo.py#L49)
+[Show source in mongo.py:56](../src/pattan_mongo_survey/mongo.py#L56)
 
 Get a list of object ids and survey titles
 
@@ -143,7 +143,7 @@ def get_survey_list(self): ...
 
 ### MongoSurveyService().get_survey_responses
 
-[Show source in mongo.py:119](../../../mongo.py#L119)
+[Show source in mongo.py:126](../src/pattan_mongo_survey/mongo.py#L126)
 
 Get all user response to a specific survey
 
@@ -159,7 +159,7 @@ def get_survey_responses(self, survey_id=None): ...
 
 ### MongoSurveyService().save_survey
 
-[Show source in mongo.py:90](../../../mongo.py#L90)
+[Show source in mongo.py:97](../src/pattan_mongo_survey/mongo.py#L97)
 
 Save a surveyJS model to the mongo survey collection
 
@@ -179,7 +179,7 @@ def save_survey(self, data): ...
 
 ### MongoSurveyService().save_survey_response
 
-[Show source in mongo.py:71](../../../mongo.py#L71)
+[Show source in mongo.py:78](../src/pattan_mongo_survey/mongo.py#L78)
 
 Save a survey responses linked to a specific survey
 
