@@ -1,9 +1,12 @@
+import json
+import logging
 from pymongo import MongoClient
 from bson import ObjectId
-import json
 from bson.dbref import DBRef
 from .exceptions import MissingSurveyId, DataSaveFailure, FetchResultsFailure, DeleteSurveyFailure, \
     DeleteSurveyResponseFailure, PattanMongoSurveyConfigurationError
+
+logger = logging.getLogger('pattan_mongo_survey').addHandler(logging.NullHandler())
 
 
 class MongoSurveyService:
