@@ -1,7 +1,6 @@
 import unittest
 from src.pattan_mongo_survey.mongo import MongoSurveyService
-import src.pattan_mongo_survey.exceptions as exceptions
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 
 
 class TestStringMethods(unittest.TestCase):

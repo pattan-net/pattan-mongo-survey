@@ -61,6 +61,7 @@ class MongoSurveyService:
         for survey in self.survey_db.find(projection={'_id': 1, 'survey': {'title': 1}}):
             survey['id'] = survey['_id']  # django template will not take a parameter that starts with in '_'
             result.append(survey)
+        logger.debug("MongoSurveyService get_survey_list count = %s " + str(len(result)))
         return result
 
     def get_survey(self, survey_id=None):
@@ -72,6 +73,7 @@ class MongoSurveyService:
         if survey_id is None:
             raise MissingSurveyId
         result = self.survey_db.find_one({'_id': ObjectId(survey_id)})
+        logger.debug("Get survey successful")
         return result
 
     def save_survey_response(self, response=None, survey_id=None):
