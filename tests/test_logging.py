@@ -44,3 +44,10 @@ class TestStringMethods(unittest.TestCase):
             except Exception as e:
                 pass
         self.assertEqual(cm.output, ['DEBUG:pattan_mongo_survey:configuration object passes'])
+
+    def test_get_survey_list(self):
+        self.mss.survey_db = Mock()
+        self.mss.survey_db.find.return_value = [{'_id':'hey hey'}]
+        with self.assertLogs('pattan_mongo_survey', level='DEBUG') as cm:
+             self.mss.get_survey_list()
+        self.assertEqual(cm.output, ['DEBUG:pattan_mongo_survey:MongoSurveyService get_survey_list count = 1'])
