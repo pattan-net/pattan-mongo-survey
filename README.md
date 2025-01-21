@@ -13,7 +13,7 @@ Support a surveyJS frontend with a mongodb backend.
 6. MONGDB_DB_RESPONSE_COLLECTION - collection used to store survey responses
 
 ## Documentation
-[Docs](https://github.com/pattan-net/pattan-mongo-survey/tree/s1300/docs)
+[Docs](https://github.com/pattan-net/pattan-mongo-survey/tree/main/docs)
 
 ## Logging
 pattan-mongo-survey creates its own logger (of the same name) which the calling application can configure.
